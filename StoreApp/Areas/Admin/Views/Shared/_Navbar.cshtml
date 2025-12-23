@@ -1,0 +1,53 @@
+﻿<nav class="navbar bg-primary border-bottom navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand" href="/">ADMIN</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+            <span class="navbar-toggle-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" id="navbarNavAltMarkup">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-controller="Dashboard" asp-action="Index">
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-controller="Product" asp-action="Index">
+                        Products (@await Component.InvokeAsync("ProductSummary"))
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-controller="Category" asp-action="Index">
+                        Categories
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-controller="Role" asp-action="Index">
+                        Roles
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-controller="User" asp-action="Index">
+                        Users
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-controller="Order" asp-action="Index">
+                        Orders
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <a class="nav-link active" asp-area="" target="_blank" aria-current="page" asp-controller="Home" asp-action="Index">
+                    WEB
+                </a>
+                <a class="nav-link active" asp-area="" aria-current="page" asp-controller="Account" asp-action="Logout">
+                    LOGOUT
+                </a>
+            </ul>
+        </>
+    </div>
+</nav>
+    
+    

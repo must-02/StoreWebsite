@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Product>
+
+<div class="text-center">
+    <div class="display-6">Products</div>
+
+    <div class="d-flex justify-content-end my-3">
+        <a asp-action="Create" class="btn btn-outline-success">
+            <i class="fa fa-plus"></i>
+            Create
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoriesMenu")
+        @await Component.InvokeAsync("ProductFilterMenu")
+        <div products="" number="3"></div>
+    </div>
+    <div class="col-md-9">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Showcase</th>
+                    <th>Price</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (Product p in Model)
+                {
+                    <tr>
+                        <td>@p.ProductId</td>
+                        <td>
+                            <img width="50" class="border border-light rounded" src="@p?.ProductImageUrl" alt="@p?.ProductName" />
+                        </td>
+                        <td>@p.ProductName</td>
+                        <td>
+                            <div class="form-check form-switch">
+                                <input type="checkbox" class="form-check-input" checked="@p.ShowCase" disabled />
+                            </div>
+                        </td>
+                        <td>@p.ProductPrice.ToString("c")</td>
+                        <td>
+                            <div class="btn-group">
+                                <a data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Update"
+                                   class="btn btn-warning" asp-action="Update" asp-route-id="@p.ProductId">
+                                    <i class="fa fa-edit"></i>
+                                    Update
+                                </a>
+
+                                <a data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Web"
+                                   class="btn btn-info" target="_blank" asp-area="" asp-controller="Product"
+                                   asp-action="Get" asp-route-id="@p.ProductId">
+                                    <i class="fa fa-search"></i>
+                                    Web
+                                </a>
+
+                                <a data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Delete"
+                                   class="btn btn-danger" asp-action="Delete" asp-route-id="@p.ProductId">
+                                    <i class="fa fa-trash"></i>
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(() => {
+            // alert("here are products");
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+}

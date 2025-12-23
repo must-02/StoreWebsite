@@ -1,0 +1,41 @@
+﻿@model Product
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="text-center">
+            <h6 class="display-6">@Model.ProductName</h6>
+            <div>
+                <img class="rounded-3 img-fluid shadow p-5 my-3" src="@Model?.ProductImageUrl" alt="@Model?.ProductName" />
+            </div>
+            <p class="text-danger">@Model?.ProductPrice.ToString("c")</p>
+        </div>
+    </div>
+</div>
+
+<div class="text-center my-3">
+    <div class="btn-group">
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Index">
+            <i class="fa-solid fa-home"></i>
+            Home
+        </a>
+
+        <form method="post" asp-page="/cart" id="@Model?.ProductId">
+            <input type="hidden" asp-for="ProductId"/>
+            <input type="hidden" name="_returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
+            <button class="btn btn-primary rounded-0" type="submit">
+                <i class="fa-solid fa-cart-plus"></i>
+                Add to cart
+            </button>
+        </form>
+        <a class="btn btn-primary" asp-controller="Product" asp-action="Index">
+            <i class="fa-solid fa-list"></i>
+            Back to Products
+        </a>
+    </div>
+</div>
+
+@section Footer {
+    <div>
+        Footer just for Get
+    </div>
+}

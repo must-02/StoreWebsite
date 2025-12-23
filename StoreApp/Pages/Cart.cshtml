@@ -1,0 +1,65 @@
+﻿@page "/cart"
+@model CartModel
+
+<div>
+    <div class="display-6 text-center my-3">
+        CART
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+                <th>Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cl in Model._cart?.CartLines ?? Enumerable.Empty<CartLine>())
+            {
+                <tr>
+                    <td>
+                        <img src="@cl.CartLineProduct.ProductImageUrl" width="50" class="rounded shadow" />
+                    </td>
+                    <td>@cl.CartLineProduct.ProductName</td>
+                    <td>@cl.Quantity</td>
+                    <td>@cl.CartLineProduct.ProductPrice.ToString("c")</td>
+                    <td>@((cl.CartLineProduct.ProductPrice * cl.Quantity).ToString("c2"))</td>
+                    <td>
+                        <form method="post" asp-page-handler="Remove">
+                            <input type="hidden" name="productId" value="@cl.CartLineProduct.ProductId" />
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                                Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="text-right" colspan="4">
+                    Total Price:
+                </td>
+                <td class="text-right text-info">
+                    @Model._cart?.ComputeTotalValue().ToString("c2")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="my-3 text-center">
+        <div class="btn btn-group">
+            <a class="btn btn-primary" href="@Model?.ReturnUrl">
+                Continue Shopping
+            </a>
+            <a class="btn btn-primary mx-3" asp-action="Checkout" asp-controller="Order">
+                Checkout
+            </a>
+        </div>
+    </div>
+</div>

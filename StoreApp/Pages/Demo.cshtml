@@ -1,0 +1,15 @@
+﻿@page "/demo"
+@model StoreApp.Pages.DemoModel
+
+
+<div class="text-center">
+    <div class="display-6 my-3">
+        Merhaba <span style="font-family: 'Times New Roman', Times, serif;">@Model.FullName</span>
+    </div>
+    <form method="post" asp-page="/demo">
+        <div class="form-group">
+            <input placeholder="Enter your nickname" name="name" class="form-controller my-3" />
+            <input type="submit" class="btn btn-primary my-3" />
+        </div>
+    </form>
+</div>
